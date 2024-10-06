@@ -81,7 +81,7 @@ Answer :
 ``` bash
 npm install -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard
 ```
-9. add parser after extends line in .eslintrc.json file or if you need simple method just copy from my [.eslintrc.json]([https://github.com/rendy-ptr/typescript-config/blob/main/express/nodemon.json](https://github.com/rendy-ptr/typescript-config/blob/main/express/.eslintrc.json))
+9. add parser after extends line in .eslintrc.json file or if you need simple method just copy from my [.eslintrc.json](https://github.com/rendy-ptr/typescript-config/blob/main/express/.eslintrc.json)
 ``` bash
 "parser": "@typescript-eslint/parser",
 ```
