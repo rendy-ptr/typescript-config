@@ -1,7 +1,9 @@
 {
-    "scripts": {
-        "start": "npx tsc -w",
-        "dev": "npx nodemon",
-        "build": "tsc"
-    }
+  "scripts": {
+    "start": "npx tsc -w",
+    "dev": "npx nodemon",
+    "build": "tsc && cp .env ./build/.env",
+    "format": "prettier --write .",
+    "prod": "node ./build/index.js"
+  }
 }
