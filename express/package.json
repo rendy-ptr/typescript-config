@@ -1,0 +1,7 @@
+{
+    "scripts": {
+        "start": "npx tsc -w",
+        "dev": "npx nodemon",
+        "build": "tsc"
+    }
+}
