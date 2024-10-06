@@ -1,25 +1,21 @@
 {
   "compilerOptions": {
-    "esModuleInterop": true,
-    "skipLibCheck": true,
     "target": "es2022",
-    "allowJs": true,
-    "resolveJsonModule": true,
-    "moduleResolution": "node",
-    "moduleDetection": "force",
-    "isolatedModules": true,
-    "verbatimModuleSyntax": true,
     "module": "commonjs",
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
     "sourceMap": true,
     "outDir": "build",
     "baseUrl": ".",
     "paths": {
       "*": ["node_modules/*"]
     },
-    "typeRoots": ["./src/types", "./node_modules/@types"]
+    "typeRoots": ["./src/types", "./node_modules/@types"],  
+    "skipLibCheck": true,
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules/*", "build/*"]
