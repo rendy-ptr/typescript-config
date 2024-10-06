@@ -26,12 +26,12 @@ npx tsc --init
 4. Copy my custom scripts from file [package.json](https://github.com/rendy-ptr/typescript-config/blob/main/express/package.json) or copy this
 ``` bash
 {
-    "scripts": {
-        "start": "npx tsc -w",
-        "dev": "npx nodemon",
-        "build": "tsc",
-        "format": "prettier --write ."
-    }
+  "scripts": {
+    "start": "npx tsc -w",
+    "dev": "npx nodemon",
+    "build": "tsc && cp .env ./build/.env",
+    "format": "prettier --write ."
+  }
 }
 ```
 5. Install Nodemon
