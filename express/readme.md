@@ -30,7 +30,8 @@ npx tsc --init
     "start": "npx tsc -w",
     "dev": "npx nodemon",
     "build": "tsc && cp .env ./build/.env",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prod": "node ./build/index.js"
   }
 }
 ```
