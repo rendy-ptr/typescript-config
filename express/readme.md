@@ -45,7 +45,7 @@ npm install -D nodemon
 6. Configuration nodemon, you can copy from my [nodemon.json](https://github.com/rendy-ptr/typescript-config/blob/main/express/nodemon.json) or copy this
 ``` bash
 {
-    "watch": ["src"],
+    "watch": ["src/**/*.ts"],
     "ext": "ts",
     "exec": "npx ts-node ./src/index.ts"
 }
@@ -102,10 +102,11 @@ npm install --save-dev --save-exact prettier
 ``` bash
 {
     "arrowParens": "always",
-    "printWidth": 120,
+    "printWidth": 80,
     "semicolon": false,
     "singleQuote": true,
-    "trailingComma": "none"
+    "trailingComma": "none",
+    "tabWidth": 2
 }
 ```
 15. create file `.prettierignore` you can copy config from my [,prettierignore.json](https://github.com/rendy-ptr/typescript-config/blob/main/express/.prettierignore) file or copy this
