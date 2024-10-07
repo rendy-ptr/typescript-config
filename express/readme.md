@@ -39,10 +39,6 @@ npx tsc --init
 ``` bash
 npm install --save-dev nodemon
 ```
-OR
-``` bash
-npm install -D nodemon
-```
 6. Configuration nodemon, you can copy from my [nodemon.json](https://github.com/rendy-ptr/typescript-config/blob/main/express/nodemon.json) or copy this
 ``` bash
 {
@@ -81,25 +77,32 @@ Answer :
 ``` bash
 npm install -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard
 ```
-9. add parser after extends line in .eslintrc.json file or if you need simple method just copy from my [.eslintrc.json](https://github.com/rendy-ptr/typescript-config/blob/main/express/.eslintrc.json)
+9. add this in .eslintrc.json file or if you need simple method just copy from my [.eslintrc.json](https://github.com/rendy-ptr/typescript-config/blob/main/express/.eslintrc.json)
 ``` bash
-"parser": "@typescript-eslint/parser",
+{
+  "env": {
+    "es2021": true,
+    "node": true
+  },
+  "extends": "standard-with-typescript",
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": ["**/tsconfig.json"]
+  },
+  "plugins": ["@typescript-eslint"],
+  "ignorePatterns": ["**/build/*", "**/node_modules/*", "**/public/*", "**/tsconfig.json"],
+  "rules": {
+    "@typescript-eslint/restrict-template-expressions": "off"
+  }
+}
 ```
-10. Delete overrides
-
-11. after parserOptions line add plugins
-``` bash
-"plugins": ["@typescript-eslint"],
-```
-12. after plugins line add ignorePatterns
-``` bash
-"ignorePatterns": ["**/build/*", "**/node_modules/*", "**/public/*"],
-```
-13. install prettier for code formatter
+10. install prettier for code formatter
 ``` bash
 npm install --save-dev --save-exact prettier
 ```
-14. create file `.prettierrc` you can copy config from my [,prettierrc.json](https://github.com/rendy-ptr/typescript-config/blob/main/express/.prettierrc) file or copy this
+11. create file `.prettierrc` you can copy config from my [,prettierrc.json](https://github.com/rendy-ptr/typescript-config/blob/main/express/.prettierrc) file or copy this
 ``` bash
 {
     "arrowParens": "always",
@@ -110,7 +113,7 @@ npm install --save-dev --save-exact prettier
     "tabWidth": 2
 }
 ```
-15. create file `.prettierignore` you can copy config from my [,prettierignore.json](https://github.com/rendy-ptr/typescript-config/blob/main/express/.prettierignore) file or copy this
+12. create file `.prettierignore` you can copy config from my [,prettierignore.json](https://github.com/rendy-ptr/typescript-config/blob/main/express/.prettierignore) file or copy this
 ``` bash
 eslintrc.json
 prettierrc.json
@@ -127,8 +130,74 @@ public
 node_modules
 vercel.json
 ```
+13. install library husky and pretty-quick for pre-commit
+``` bash
+npm i -D husky pretty-quick
+```
 
+14. edit file `package.json`
+``` bash
+{
+  "scripts": {
+    "start": "npx tsc -w",
+    "dev": "npx nodemon",
+    "build": "tsc && cp .env ./build/.env",
+    "format": "prettier --write .",
+    "prod": "node ./build/index.js",
+    "prepare": "husky install",
+    "check-format": "prettier --check .",
+    "check-lint": "eslint . --ext ts --ext tsx --ext js",
+    "check-types": "tsc --pretty --noEmit"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npx pretty-quick --staged ng lint bg test",
+      "pre-push": "ng build --aot true" 
+    }
+  }
+}
 
+```
+15. run this to install husky
+``` bash
+npm run prepare
+```
+16. create a `pre-commit` file inside the `_husky` folder and fill it with this
+``` bash
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo ' Styling, testing and building your project before commit...'
+
+# Check Prettier
+npm run check-format ||
+(
+    echo 'Prettier Check Failed. Run npm run format, add changes and try commit again.';
+    false;
+)
+
+# Check ESLint
+npm run check-lint ||
+(
+    echo 'ESLint Check Failed. Make the required changes listed above, add changes and try commit again.';
+    false;
+)
+
+# Check tsconfig
+npm run check-types ||
+(
+    echo 'Failed type check. Make the changes require above, add changes and try commit again.';
+    false;
+)
+
+npm run build ||
+(
+    echo 'Your Build failed. view the errors above';
+    false;
+)
+
+echo "Success Commit...";
+```
 
 
 ## Contributing
