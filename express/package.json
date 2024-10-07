@@ -4,6 +4,16 @@
     "dev": "npx nodemon",
     "build": "tsc && cp .env ./build/.env",
     "format": "prettier --write .",
-    "prod": "node ./build/index.js"
+    "prod": "node ./build/index.js",
+    "prepare": "husky install",
+    "check-format": "prettier --check .",
+    "check-lint": "eslint . --ext ts --ext tsx --ext js",
+    "check-types": "tsc --pretty --noEmit"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npx pretty-quick --staged ng lint bg test",
+      "pre-push": "ng build --aot true" 
+    }
   }
 }
